@@ -1,0 +1,35 @@
+---
+- name: make git clone dir
+  become: yes
+  become_user: "{{ansible_ssh_user}}" 
+  file: path='/home/{{ansible_ssh_user}}/.pyenv' state=directory
+- name: git clone 
+  become: yes
+  become_user: "{{ansible_ssh_user}}" 
+  git: repo=https://github.com/pyenv/pyenv.git dest=/home/{{ansible_ssh_user}}/.pyenv
+- name: define env variables 1
+  become: yes
+  become_user: "{{ansible_ssh_user}}" 
+  lineinfile: >
+    dest='/home/{{ansible_ssh_user}}/.bashrc'
+    line='export PYENV_ROOT="$HOME/.pyenv"'
+    backup=yes
+- name: define env variables 2
+  become: yes
+  become_user: "{{ansible_ssh_user}}" 
+  lineinfile: >
+    dest='/home/{{ansible_ssh_user}}/.bashrc'
+    line='export PATH="$PYENV_ROOT/bin:$PATH"'
+    backup=yes
+- name: define env variables 3
+  become: yes
+  become_user: "{{ansible_ssh_user}}" 
+  lineinfile: >
+    dest='/home/{{ansible_ssh_user}}/.bashrc'
+    line='eval "$(pyenv init -)"'
+    backup=yes
+#- name: install anaconda
+#  become: yes
+#  become_user: "{{ansible_ssh_user}}" 
+#  shell: pyenv install anaconda3-4.4.0
+    
