@@ -1,0 +1,14 @@
+---
+- name: go get
+  become: yes
+  become_user: "{{ansible_ssh_user}}"
+  command: go get -u github.com/motemen/gore
+  command: go get -u github.com/nsf/gocode
+  command: go get -u github.com/k0kubun/pp
+  command: go get -u golang.org/x/tools/cmd/godoc
+  command: go get -u cloud.google.com/go/translate
+  command: go get -u golang.org/x/text/language
+  command: go get -u google.golang.org/api/option
+  environment:
+    GOPATH: '/home/{{ansible_ssh_user}}/go'
+    PATH: '{{ ansible_env.PATH }}:/usr/local/go/bin'

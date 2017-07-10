@@ -1,0 +1,52 @@
+---
+- name: add google drive
+  apt_repository:
+    repo: 'ppa:alessandro-strada/ppa'
+- name: Install and configure vsftp
+  apt: name={{item}} state=present update_cache=yes
+  with_items:
+    - vsftpd
+    - google-drive-ocamlfuse 
+- name: prepare ftp user
+  user:
+      name: sammy
+      password: $6$AMR/F1HJ1C$.Z1NOcjQiyt0FXAsK5CNhJycferwkx4jh.O5wHnrKDQd5NrA4BdM.tjg1.zKcXhEIIsmr7MzxwaKJmeTOWoEA1
+- name: prepare ftp directory
+  file: path=/home/sammy/ftp state=directory owner=nobody group=nogroup mode=a-w
+  file: path=/home/sammy/ftp/files state=directory owner=sammy group=sammy mode=755
+- name: edit vsftp config
+  lineinfile: >
+    dest=/etc/vsftpd.conf
+    line='write_enable=YES'
+    regexp='#write_enable=YES'
+    backup=yes
+  lineinfile: >
+    dest=/etc/vsftpd.conf
+    line='chroot_local_user=YES'
+    regexp='#chroot_local_user=YES'
+- name: append vsftp conf
+  lineinfile: 
+    dest=/etc/vsftpd.conf
+    line={{ item }}
+  with_items:
+    - 'user_sub_token=$USER'
+    - 'local_root=/home/$USER/ftp'
+    - 'pasv_min_port=40000'
+    - 'pasv_max_port=50000'
+    - 'userlist_enable=YES'
+    - 'userlist_file=/etc/vsftpd.userlist'
+    - 'userlist_deny=NO'
+    - 'pasv_promiscuous=YES'
+    - 'port_promiscuous=YES'
+- name: create vsftpd userlist
+  lineinfile: >
+    dest=/etc/vsftpd.userlist
+    line='sammy'
+    create=yes
+- name: change pam
+  lineinfile: >
+    dest=/etc/pam.d/vsftpd
+    line='#auth	required	pam_shells.so'
+    regexp='auth	required	pam_shells.so'
+    backup=yes
+

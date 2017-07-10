@@ -1,0 +1,32 @@
+---
+- name: Install commands
+  apt: name={{item}}
+  with_items:
+    - lv
+    - tree
+    - libhttp-daemon-perl
+    - liblwp-protocol-https-perl
+    - libyaml-tiny-perl
+- name: Create Bin Dir
+  sudo: no
+  file: path=/home/{{ansible_ssh_user}}/bin state=directory
+- name: Create github Dir
+  sudo: no
+  file: path=/home/{{ansible_ssh_user}}/github state=directory
+- name: Create Emacs Dirs
+  sudo: no
+  file: path=/home/{{ansible_ssh_user}}/.emacs.d state=directory
+- name: Create .honyaku Dirs
+  sudo: no
+  file: path=/home/{{ansible_ssh_user}}/.honyaki state=directory
+- name: git clone
+  git: repo=https://github.com/yasukun/dotemacs.git dest=/home/{{ansible_ssh_user}}/.emacs.d
+  sudo: no
+- name: copy tmux.conf
+  sudo: no
+  copy:
+    src: tmux.conf
+    dest: /home/{{ansible_ssh_user}}/.tmux.conf
+- name: Create site-lisp dirs
+  sudo: no
+  file: path=/home/{{ansible_ssh_user}}/.emacs.d/site-lisp state=directory

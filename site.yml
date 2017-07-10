@@ -1,0 +1,19 @@
+---
+- name: Install default
+  hosts: all
+  sudo: yes
+  roles:
+    - role: sansible.golang
+      golang:
+        workspace_user: masa_yasu_kun
+    - role: andrewrothstein.rstudio-server
+    - role: andrewrothstein.emacs
+    - role: common
+    - role: tersmitten.htop
+    - role: mjanser.tmux
+    - {role: jdauphant.nginx,
+       nginx_http_params: ["sendfile on", "access_log /var/log/nginx/access.log"]}
+#    - role: vsftp
+    - role: develop
+    - role: golangdev
+    - role: rustdev

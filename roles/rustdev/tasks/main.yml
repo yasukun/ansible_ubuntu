@@ -1,0 +1,19 @@
+---
+- name: install rust
+  become: yes
+  become_user: "{{ansible_ssh_user}}" 
+  shell: curl https://sh.rustup.rs -sSf | sh -s -- -y
+- name: install rust tool for emacs
+  become: yes
+  become_user: "{{ansible_ssh_user}}"
+  command: cargo install racer
+  command: rustup component add rust-src
+  environment:
+    PATH: '{{ ansible_env.PATH }}:/home/{{ansible_ssh_user}}/.cargo/bin'
+- name: set rustpath
+  become: yes
+  become_user: "{{ansible_ssh_user}}"
+  lineinfile: >
+    dest='/home/{{ansible_ssh_user}}/.bashrc'
+    line='export PATH="$HOME/.cargo/bin:$PATH"'
+    backup=yes
