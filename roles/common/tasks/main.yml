@@ -10,15 +10,15 @@
 - name: Create Bin Dir
   sudo: no
   file: path=/home/{{ansible_ssh_user}}/bin state=directory
+- name: Create Bin Dir
+  sudo: no
+  file: path=/home/{{ansible_ssh_user}}/.honyaku state=directory
 - name: Create github Dir
   sudo: no
   file: path=/home/{{ansible_ssh_user}}/github state=directory
 - name: Create Emacs Dirs
   sudo: no
   file: path=/home/{{ansible_ssh_user}}/.emacs.d state=directory
-- name: Create .honyaku Dirs
-  sudo: no
-  file: path=/home/{{ansible_ssh_user}}/.honyaki state=directory
 - name: git clone
   git: repo=https://github.com/yasukun/dotemacs.git dest=/home/{{ansible_ssh_user}}/.emacs.d
   sudo: no

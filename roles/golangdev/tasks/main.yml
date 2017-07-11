@@ -12,3 +12,11 @@
   environment:
     GOPATH: '/home/{{ansible_ssh_user}}/go'
     PATH: '{{ ansible_env.PATH }}:/usr/local/go/bin'
+- name: Create github yasukundir
+  sudo: no
+  file: path=/home/{{ansible_ssh_user}}/go/src/github.com/yasukun/honyaku-exe state=directory
+- name: copy honyaku-exe src
+  sudo: no
+  copy:
+    src: main.go
+    dest: /home/{{ansible_ssh_user}}/go/src/github.com/yasukun/honyaku-exe
