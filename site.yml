@@ -17,3 +17,7 @@
     - role: develop
     - role: golangdev
     - role: rustdev
+    - role: clojure
+    - role: nginxconf
+    - role: pyenv
+    - role: vaulteval

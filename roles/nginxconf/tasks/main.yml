@@ -1,0 +1,16 @@
+---
+- name: add group rsuser
+  group:
+    name: rsuser
+    state: present
+- name: add rsuser
+  user:
+    name: rsuser
+    password: $6$AMR/F1HJ1C$.Z1NOcjQiyt0FXAsK5CNhJycferwkx4jh.O5wHnrKDQd5NrA4BdM.tjg1.zKcXhEIIsmr7MzxwaKJmeTOWoEA1
+    group: rsuser
+- name: mkdir cert dir
+  file: path=/etc/nginx/cert state=directory
+- name: set nginx conf
+  copy:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf.main

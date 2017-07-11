@@ -1,0 +1,12 @@
+---
+- name: download lein
+  become: yes
+  become_user: "{{ansible_ssh_user}}"
+  get_url:
+    url: https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
+    dest: /home/{{ansible_ssh_user}}/bin/lein
+    mode: 0755
+- name: install lein 
+  become: yes
+  become_user: "{{ansible_ssh_user}}"
+  command: /home/{{ansible_ssh_user}}/bin/lein
