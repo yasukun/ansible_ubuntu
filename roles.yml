@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 - name: sansible.golang
   name: andrewrothstein.emacs
   name: tersmitten.rstudio-server
@@ -5,3 +6,11 @@
   name: tersmitten.htop
   name: jdauphant.nginx
   name: jpnewman.java
+=======
+- src: sansible.golang
+- src: andrewrothstein.rstudio-server
+- src: andrewrothstein.emacs
+- src: mjanser.tmux
+- src: tersmitten.htop
+- src: jdauphant.nginx
+>>>>>>> c5a2ea1e65d44acc20a196e70db47b5a14f815e8
