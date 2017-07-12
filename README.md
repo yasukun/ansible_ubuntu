@@ -1,5 +1,11 @@
 # ansible_ubuntu
 
+## Dependencies
+
+ * [ansible-r](https://github.com/Oefenweb/ansible-r)
+
+## usage
+
 ```bash
 $ ansible-galaxy install -p ./roles -r roles.yml
 $ ansible-playbook site.yml --ask-vault-pass

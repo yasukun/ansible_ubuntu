@@ -9,7 +9,8 @@
   roles:
     - role: sansible.golang
       golang:
-        workspace_user: {{workspace_user}}
+        workspace_user: "{{ workspace_user }}"
+    - role: ansible-r
     - role: tersmitten.rstudio-server
     - role: jpnewman.java
     - role: andrewrothstein.emacs
