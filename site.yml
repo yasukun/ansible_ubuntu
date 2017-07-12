@@ -2,11 +2,16 @@
 - name: Install default
   hosts: all
   sudo: yes
+  vars_prompt:
+    - name: workspace_user
+      prompt: "input workspace_user"
+      private: no
   roles:
     - role: sansible.golang
       golang:
-        workspace_user: masa_yasu_kun
-    - role: andrewrothstein.rstudio-server
+        workspace_user: {{workspace_user}}
+    - role: tersmitten.rstudio-server
+    - role: jpnewman.java
     - role: andrewrothstein.emacs
     - role: common
     - role: tersmitten.htop

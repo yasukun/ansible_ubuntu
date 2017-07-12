@@ -1,6 +1,7 @@
 - name: sansible.golang
-  name: andrewrothstein.rstudio-server
   name: andrewrothstein.emacs
+  name: tersmitten.rstudio-server
   name: mjanser.tmux
   name: tersmitten.htop
   name: jdauphant.nginx
+  name: jpnewman.java
