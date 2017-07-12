@@ -30,3 +30,11 @@
 - name: Create site-lisp dirs
   sudo: no
   file: path=/home/{{ansible_ssh_user}}/.emacs.d/site-lisp state=directory
+- name: create .inputrc
+  become: yes
+  become_user: "{{ansible_ssh_user}}"
+  lineinfile: >-
+    dest='/home/{{ansible_ssh_user}}/.inputrc'
+    line='set bell-style none'
+    state=present
+    create=yes

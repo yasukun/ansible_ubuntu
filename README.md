@@ -6,11 +6,17 @@
 
 ## usage
 
+/etc/ansible/hosts
+
+```bash
+localhost	ansible_connection=local	ansible_ssh_user=hoge
+```
+command
+
 ```bash
 $ ansible-galaxy install -p ./roles -r roles.yml
 $ ansible-playbook site.yml --ask-vault-pass
 ```
-
 ## set up nginx
 
 ```bash
